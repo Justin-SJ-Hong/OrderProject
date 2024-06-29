@@ -16,6 +16,7 @@ public class OrderController {
         for (Order order : orders) {
             if (order.getOrderNum() == orderNum) {
                 order.registerOrder(orderInfo);
+                break;
             }
         }
     }

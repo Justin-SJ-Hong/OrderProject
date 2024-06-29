@@ -13,6 +13,9 @@ public class OrderDetail {
 
     public void registerOrderDetail(OrderDetailInfo orderDetailInfo) {
         // 등록 로직 구현
+		this.orderQuantity = orderDetailInfo.getOrderQuantity();
+		this.discountRate = orderDetailInfo.getDiscountRate();
+		this.product = orderDetailInfo.getProduct();
     }
 
     // Getters and Setters

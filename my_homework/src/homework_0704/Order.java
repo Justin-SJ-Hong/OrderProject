@@ -14,6 +14,12 @@ public class Order {
 
     public void registerOrder(OrderInfo orderInfo) {
         // 등록 로직 구현
+		this.orderNum = orderInfo.getOrderNum();
+		this.orderDate = orderInfo.getOrderDate();
+		for (OrderDetailInfo detailInfo : orderInfo.getOrderDetails()) {
+			OrderDetail orderDetail = new OrderDetail(detailInfo.getOrderQuantity(), detailInfo.getDiscountRate(), detailInfo.getProduct());
+			orderDetails.add(orderDetail);
+		}
     }
     
     // Getters and Setters

@@ -18,8 +18,14 @@ public class OrderInfo {
 //	protected String shippingAddress;
 //	protected String billingAddress;
 	protected List<OrderDetailInfo> orderDetails;
-    
-//    public OrderInfo(int no, String orderId, String customerId, LocalDate orderDate, LocalDate deliveryDate,
+
+	public OrderInfo(int no, LocalDate orderDate, List<OrderDetailInfo> orderDetails) {
+		this.no = counter++;
+		this.orderDate = orderDate;
+		this.orderDetails = orderDetails;
+	}
+
+	//    public OrderInfo(int no, String orderId, String customerId, LocalDate orderDate, LocalDate deliveryDate,
 //			String status, double totalAmount, double discount, String salesRepresentativeId, String paymentTerms,
 //			String shippingAddress, String billingAddress) {
 //		this.no = ++counter;
@@ -60,7 +66,16 @@ public class OrderInfo {
 	public void setOrderDate(LocalDate orderDate) {
 		this.orderDate = orderDate;
 	}
-//	public LocalDate getDeliveryDate() {
+
+	public List<OrderDetailInfo> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetailInfo> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+	//	public LocalDate getDeliveryDate() {
 //		return deliveryDate;
 //	}
 //	public void setDeliveryDate(LocalDate deliveryDate) {
