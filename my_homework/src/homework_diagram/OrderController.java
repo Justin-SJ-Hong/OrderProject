@@ -1,38 +1,58 @@
 package homework_diagram;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 public class OrderController {
-	private Order order;
-//    private OrderDetail orderDetail;
+	private Map<String, Warehouse> warehouses;
 
-//    public OrderController(Order order, OrderDetail orderDetail) {
-	public OrderController(Order order) {
-        this.order = order;
-//        this.orderDetail = orderDetail;
+    public OrderController() {
+        this.warehouses = new HashMap<>();
     }
 
-    public void registerOrder(OrderInfo orderInfo) {
+    public void addWarehouse(Warehouse warehouse) {
+    	warehouses.put(warehouse.getWarehouseName(), warehouse);
+    }
+
+    public Warehouse getInventoryByName(String name) {
+        return warehouses.get(name);
+    }
+
+    public void registerOrder(OrderInfo orderInfo, List<OrderDetailInfo> orderDetailInfos, String warehouseName) {
+    	Order order = new Order();
         order.registerOrder(orderInfo);
-    }
-
-    public void addOrderDetail(OrderDetailInfo orderDetailInfo) {
-        OrderDetail detail = new OrderDetail(orderDetailInfo.getQuantity(), orderDetailInfo.getDiscount());
-        order.addOrderDetail(detail);
+        for (OrderDetailInfo detailInfo : orderDetailInfos) {
+            OrderDetail orderDetail = new OrderDetail(detailInfo);
+            order.addOrderDetail(orderDetail);
+        }
+        
+        if ("완료".equals(orderInfo.getStatus())) {
+            Warehouse warehouse = warehouses.get(warehouseName);
+            if (warehouse != null) {
+                for (OrderDetailInfo detailInfo : orderDetailInfos) {
+                	warehouse.addProduct(detailInfo);
+                }
+            }
+        }
     }
 
     public void cancelOrder(String orderId) {
-    	// Assuming orderNum is a unique identifier for the order
-        if (Integer.toString(order.getOrderNum()).equals(orderId)) {
-            // Reset order details or remove order logic can be added here
-            order = new Order(); // Resetting the order
-            System.out.println("Order " + orderId + " has been cancelled.");
+        boolean result = Order.removeOrder(orderId);
+        if (result) {
+            System.out.println("Order " + orderId + " 의 주문을 취소했습니다..");
         } else {
-            System.out.println("Order ID " + orderId + " not found.");
+            System.out.println("Order ID " + orderId + " 를 찾을 수 없습니다.");
         }
     }
     
     public List<Order> getOrders() {
         return Order.getOrders();
+    }
+    
+    public List<Warehouse> getWarehouses() {
+        return new ArrayList<>(warehouses.values());
     }
 }

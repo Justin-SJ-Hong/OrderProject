@@ -1,29 +1,13 @@
 package homework_diagram;
 
 public class OrderDetail {
-	private int orderQuantity;
-    private double discountRate;
+	private OrderDetailInfo orderDetailInfo;
 
-    public OrderDetail(int orderQuantity, double discountRate) {
-        this.orderQuantity = orderQuantity;
-        this.discountRate = discountRate;
+    public OrderDetail(OrderDetailInfo orderDetailInfo) {
+    	this.orderDetailInfo = orderDetailInfo;
     }
-
-	public int getOrderQuantity() {
-		return orderQuantity;
-	}
-
-	public void setOrderQuantity(int orderQuantity) {
-		this.orderQuantity = orderQuantity;
-	}
-
-	public double getDiscountRate() {
-		return discountRate;
-	}
-
-	public void setDiscountRate(double discountRate) {
-		this.discountRate = discountRate;
-	}
     
-    
+    public OrderDetailInfo getOrderDetailInfo() {
+        return orderDetailInfo;
+    }
 }
